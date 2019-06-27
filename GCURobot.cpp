@@ -5,18 +5,19 @@
 GCURobot::GCURobot()
 {
   connected = false;
-  angles[0] = 0;
-  angles[1] = 0;
+  angles[0] = 45;
+  angles[1] = 45;
 }
 
 int GCURobot::connect()
 {
 	joint1.attach(3);
-	delay(100);
+	joint1.write(45);
 	joint2.attach(5);
-	delay(100);
+	joint2.write(45);
 	gripper.attach(6);
-	delay(100);
+	gripper.write(85);
+	go();
 	connected = true;
 }
 
@@ -24,7 +25,7 @@ boolean GCURobot::OpenGripper()
 {
 	if(!GripperState)
 	{
-		gripper.write(90);
+		gripper.write(0);
 		delay(45);
 		GripperState = true;
 	}
@@ -36,7 +37,7 @@ boolean GCURobot::CloseGripper()
 {
 	if (GripperState)
 	{
-		gripper.write(0);
+		gripper.write(80);
 		delay(45);
 		GripperState = false;
 	}
